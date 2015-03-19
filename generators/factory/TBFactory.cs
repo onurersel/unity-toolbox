@@ -14,13 +14,9 @@ public class TBFactory : MonoBehaviour {
 	void Awake()
 	{
 		m_pool = GetComponent<TBPool>();
-	}
-
-	void Start()
-	{
 		sortedItems = new List<TBFactoryItem>(items);
 		sortedItems.Sort(delegate(TBFactoryItem x, TBFactoryItem y) {
-				 if(x.hardness == y.hardness)		return 0;
+			if(x.hardness == y.hardness)		return 0;
 			else if (x.hardness > y.hardness)		return 1;
 			else									return -1;
 		});
@@ -36,9 +32,21 @@ public class TBFactory : MonoBehaviour {
 		int l = 0;
 		for(int i = 0; i < sortedItems.Count; ++i)
 		{
-
+			var item = sortedItems[i];
+			if(item.hardness > hardness)
+			{
+				break;
+			}
+			l++;
 		}
-		return null;
+
+		if(l == 0)
+			return null;
+
+		var dice = TBRandom.Dice(l);
+		var template = sortedItems[dice].template;
+
+		return m_pool.RequestWithTemplate(template);
 	}
 }
 

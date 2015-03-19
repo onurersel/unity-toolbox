@@ -8,6 +8,6 @@ public class TBRandom : MonoBehaviour {
 
 	static public int Dice(int side)
 	{
-		return Mathf.FloorToInt(Random.value * (side-0.00000001f));
+		return Mathf.FloorToInt(Random.value * (side-0.000001f));
 	}
 }
