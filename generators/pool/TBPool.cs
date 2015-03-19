@@ -89,7 +89,7 @@ public class TBPool : MonoBehaviour {
 
 namespace TBPool_private
 {
-	class TBPoolItem
+	public class TBPoolItem
 	{
 		private List<GameObject> m_requestedList;
 		private List<GameObject> m_recycledList;
