@@ -7,6 +7,7 @@ using TBPool_private;
 public class TBPool : MonoBehaviour {
 	
 	private List<TBPoolItem> m_poolList;
+	[HideInInspector]
 	public List<GameObject> requestedObjects;
 	public Transform container;
 
@@ -131,6 +132,7 @@ namespace TBPool_private
 			
 			m_requestedList.Add(obj);
 			obj.SetActive(true);
+			if(m_container != null)		obj.transform.parent = m_container;
 			return obj;
 		}
 		public void Recycle(GameObject obj)
