@@ -10,6 +10,8 @@ public class TBFactory : MonoBehaviour {
 	[Range(0f,1f)]
 	public float hardness;
 	public List<TBFactoryItem> items;
+    public bool isForcingIndex;
+    public int forcedIndex;
 
 	void Awake()
 	{
@@ -29,6 +31,12 @@ public class TBFactory : MonoBehaviour {
 	}
 	public GameObject Request()
 	{
+	    if (isForcingIndex)
+	    {
+            var forcedTemplate = sortedItems[forcedIndex].template;
+            return m_pool.RequestWithTemplate(forcedTemplate);
+	    }
+
 		int l = 0;
 		for(int i = 0; i < sortedItems.Count; ++i)
 		{
@@ -48,6 +56,11 @@ public class TBFactory : MonoBehaviour {
 
 		return m_pool.RequestWithTemplate(template);
 	}
+
+    public void Recycle(GameObject gameObject)
+    {
+        m_pool.Recycle(gameObject);
+    }
 }
 
 namespace TBFactory_private
